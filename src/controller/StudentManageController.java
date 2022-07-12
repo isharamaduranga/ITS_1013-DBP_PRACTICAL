@@ -187,7 +187,18 @@ public class StudentManageController {
     }
 
     public void DeleteStudentOnAction(ActionEvent actionEvent) {
+        try{
 
+            if(CrudUtil.execute("DELETE FROM Student WHERE student_id =?",txtStudentId.getText())){
+                new Alert(Alert.AlertType.CONFIRMATION,"Deleted!").showAndWait();
+            }else{
+                new Alert(Alert.AlertType.WARNING,"Try Again!").show();
+            }
+        }catch (ClassNotFoundException | SQLException |NullPointerException  e){
+            e.printStackTrace();
+        }
+        tableLoad();
+      clearFields();
 
     }
 
