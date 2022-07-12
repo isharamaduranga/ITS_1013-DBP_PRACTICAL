@@ -70,6 +70,6 @@ public class DashBoardMainController {
     }
 
     public void manageStudentOnAction(ActionEvent actionEvent) throws IOException {
-        NavigationUtil.setUiChildren(dashBoardContext, "");
+        NavigationUtil.setUiChildren(dashBoardContext, "StudentManage");
     }
 }

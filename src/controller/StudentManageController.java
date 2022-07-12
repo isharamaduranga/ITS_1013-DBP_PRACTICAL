@@ -17,6 +17,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 
 public class StudentManageController {
+
     public TableView tblStudent;
     public TableColumn colStudentID;
     public TableColumn colStudentName;
@@ -24,13 +25,16 @@ public class StudentManageController {
     public TableColumn colContact;
     public TableColumn colAddress;
     public TableColumn colNic;
+
     public JFXTextField txtStudentId;
     public JFXTextField txtStudentName;
     public JFXTextField txtEmail;
     public JFXTextField txtContact;
     public JFXTextField txtSAddress;
     public JFXTextField txtNic;
+
     public JFXTextField txtSearchStudentId;
+
     public JFXButton btnAdd;
     public JFXButton btnDelete;
     public JFXButton btnUpdate;
