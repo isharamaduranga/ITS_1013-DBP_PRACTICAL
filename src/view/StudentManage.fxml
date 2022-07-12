@@ -13,7 +13,6 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="782.0" prefWidth="1062.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.StudentManageController">
    <children>
       <Pane layoutX="7.0" layoutY="7.0" prefHeight="51.0" prefWidth="1049.0" style="-fx-background-color: #fc5c65;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -25,7 +24,7 @@
             </Label>
          </children>
       </Pane>
-      <JFXButton fx:id="btnDelete" layoutX="727.0" layoutY="297.0" onAction="#DeleteStudentOnAction" onMouseMoved="#btnMouseMovedOnAction" prefHeight="20.0" prefWidth="150.0" styleClass="buttonDelete" stylesheets="@css/color.css" text="DELETE" textFill="WHITE">
+      <JFXButton fx:id="btnDelete" layoutX="727.0" layoutY="297.0" onAction="#DeleteStudentOnAction" prefHeight="20.0" prefWidth="150.0" styleClass="buttonDelete" stylesheets="@css/color.css" text="DELETE" textFill="WHITE">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
@@ -37,7 +36,7 @@
             </ImageView>
          </graphic>
       </JFXButton>
-      <JFXButton fx:id="btnAdd" layoutX="397.0" layoutY="297.0" onAction="#AddStudentOnAction" onMouseMoved="#btnMouseMovedOnAction" prefHeight="20.0" prefWidth="150.0" styleClass="buttonAdd" stylesheets="@css/color.css" text="ADD" textFill="WHITE">
+      <JFXButton fx:id="btnAdd" layoutX="397.0" layoutY="297.0" onAction="#AddStudentOnAction" prefHeight="20.0" prefWidth="150.0" styleClass="buttonAdd" stylesheets="@css/color.css" text="ADD" textFill="WHITE">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
@@ -49,7 +48,7 @@
             </ImageView>
          </graphic>
       </JFXButton>
-      <JFXButton fx:id="btnUpdate" layoutX="562.0" layoutY="297.0" onAction="#UpdateStudentOnAction" onMouseMoved="#btnMouseMovedOnAction" prefHeight="20.0" prefWidth="150.0" styleClass="buttonUpdate" stylesheets="@css/color.css" text="UPDATE" textFill="WHITE">
+      <JFXButton fx:id="btnUpdate" layoutX="562.0" layoutY="297.0" onAction="#UpdateStudentOnAction" prefHeight="20.0" prefWidth="150.0" styleClass="buttonUpdate" stylesheets="@css/color.css" text="UPDATE" textFill="WHITE">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
@@ -61,7 +60,7 @@
             </ImageView>
          </graphic>
       </JFXButton>
-      <JFXButton fx:id="btnClear" layoutX="890.0" layoutY="297.0" onAction="#btnClearFieldsOnAction" onMouseMoved="#btnMouseMovedOnAction" prefHeight="20.0" prefWidth="150.0" ripplerFill="#00ff2f" styleClass="buttonLightBlue" stylesheets="@css/color.css" text="CLEAR" textFill="WHITE">
+      <JFXButton fx:id="btnClear" layoutX="890.0" layoutY="297.0" onAction="#btnClearFieldsOnAction" prefHeight="20.0" prefWidth="150.0" ripplerFill="#00ff2f" styleClass="buttonLightBlue" stylesheets="@css/color.css" text="CLEAR" textFill="WHITE">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
