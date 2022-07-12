@@ -10,6 +10,6 @@
     <orderEntry type="library" name="mysql-connector-java-8.0.22" level="project" />
     <orderEntry type="library" name="jfoenix-8.0.8" level="project" />
     <orderEntry type="library" name="fontawesomefx-8.2" level="project" />
-    <orderEntry type="library" name="TrayTester" level="project" />
+    <orderEntry type="library" name="AnimateFX-1.2.0 " level="project" />
   </component>
 </module>

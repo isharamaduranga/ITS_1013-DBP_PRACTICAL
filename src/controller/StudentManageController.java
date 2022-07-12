@@ -8,6 +8,7 @@
 
 package controller;
 
+import animatefx.animation.ZoomIn;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import javafx.collections.FXCollections;
@@ -59,7 +60,8 @@ public class StudentManageController {
     LinkedHashMap<JFXTextField, Pattern> map = new LinkedHashMap<>();
 
     public void initialize(){
-
+        /** tabel zoom in feature */
+        new ZoomIn(tblStudent).play();
         btnAdd.setDisable(true);
         btnUpdate.setDisable(true);
         btnDelete.setDisable(true);
