@@ -53,6 +53,10 @@ public class StudentManageController {
 
     public void initialize(){
 
+        btnAdd.setDisable(true);
+        btnUpdate.setDisable(true);
+        btnDelete.setDisable(true);
+
 
         colStudentID.setCellValueFactory(new PropertyValueFactory("student_id"));
         colStudentName.setCellValueFactory(new PropertyValueFactory("student_name"));
@@ -78,8 +82,15 @@ public class StudentManageController {
     }
 
     private void setData(Student s) {
-
-
+        txtStudentId.setText(s.getStudent_id());
+        txtStudentName.setText(s.getStudent_name());
+        txtEmail.setText(s.getEmail());
+        txtContact.setText(s.getContact());
+        txtSAddress.setText(s.getAddress());
+        txtNic.setText(s.getNic());
+        btnUpdate.setDisable(false);
+        btnDelete.setDisable(false);
+        btnAdd.setDisable(true);
     }
 
     private void tableLoad() {
