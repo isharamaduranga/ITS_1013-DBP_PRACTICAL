@@ -19,13 +19,17 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import model.Student;
 import util.CrudUtil;
+import util.ValidationUtil;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.LinkedHashMap;
+import java.util.regex.Pattern;
 
 public class StudentManageController {
 
@@ -50,6 +54,9 @@ public class StudentManageController {
     public JFXButton btnDelete;
     public JFXButton btnUpdate;
     public JFXButton btnClear;
+
+    /** Define Linked-HashMap for the validation  */
+    LinkedHashMap<JFXTextField, Pattern> map = new LinkedHashMap<>();
 
     public void initialize(){
 
@@ -77,7 +84,23 @@ public class StudentManageController {
         catch (NullPointerException e){
             e.printStackTrace();
         }
+        /** create validation pattern*/
+        //Create a pattern and compile it to use
+        Pattern idPattern = Pattern.compile("^(SI-)[0-9]{3,5}$");
+        Pattern namePattern = Pattern.compile("^[A-z]{3,20}$");
+        Pattern EmailPattern = Pattern.compile("^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*$");
+        Pattern contactPattern = Pattern.compile("^(?:7|0|(?:\\+94))[0-9]{9}$");
+        Pattern AddressPattern = Pattern.compile("^[A-z0-9 ,/]{4,20}$");
+        Pattern nicPattern = Pattern.compile("^[A-z0-9]{4,20}$");
 
+
+        //add pattern and text to the map
+        map.put(txtStudentId,idPattern);
+        map.put(txtStudentName,namePattern);
+        map.put(txtEmail,EmailPattern);
+        map.put(txtContact,contactPattern);
+        map.put(txtSAddress,AddressPattern);
+        map.put(txtNic,nicPattern);
 
     }
 
@@ -137,8 +160,19 @@ public class StudentManageController {
             e.printStackTrace();
         }
     }
-
+    /** Define the function of cross to among the textFields(use Enter press)  */
     public void textFields_Key_Released(KeyEvent keyEvent) {
+        ValidationUtil.validate(map,btnAdd);
+
+        if (keyEvent.getCode()== KeyCode.ENTER){
+            Object response = ValidationUtil.validate(map,btnAdd);
+            if (response instanceof JFXTextField){
+                JFXTextField textField = (JFXTextField) response;
+                textField.requestFocus();
+            }else if (response instanceof Boolean){
+
+            }
+        }
     }
 
     public void AddStudentOnAction(ActionEvent actionEvent) {
