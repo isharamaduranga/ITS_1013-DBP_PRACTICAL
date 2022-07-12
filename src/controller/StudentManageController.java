@@ -22,7 +22,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
 import model.Student;
 import util.CrudUtil;
 import util.ValidationUtil;
@@ -56,10 +55,12 @@ public class StudentManageController {
     public JFXButton btnUpdate;
     public JFXButton btnClear;
 
-    /** Define Linked-HashMap for the validation  */
+    /**
+     * Define Linked-HashMap for the validation
+     */
     LinkedHashMap<JFXTextField, Pattern> map = new LinkedHashMap<>();
 
-    public void initialize(){
+    public void initialize() {
         /** tabel zoom in feature */
         new ZoomIn(tblStudent).play();
         btnAdd.setDisable(true);
@@ -74,16 +75,15 @@ public class StudentManageController {
         colAddress.setCellValueFactory(new PropertyValueFactory("address"));
         colNic.setCellValueFactory(new PropertyValueFactory("nic"));
 
-        try{
+        try {
             tableLoad();
             tblStudent.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-                if(newValue!=null){
+                if (newValue != null) {
                     setData(newValue);
 
                 }
             });
-        }
-        catch (NullPointerException e){
+        } catch (NullPointerException e) {
             e.printStackTrace();
         }
         /** create validation pattern*/
@@ -97,12 +97,12 @@ public class StudentManageController {
 
 
         //add pattern and text to the map
-        map.put(txtStudentId,idPattern);
-        map.put(txtStudentName,namePattern);
-        map.put(txtEmail,EmailPattern);
-        map.put(txtContact,contactPattern);
-        map.put(txtSAddress,AddressPattern);
-        map.put(txtNic,nicPattern);
+        map.put(txtStudentId, idPattern);
+        map.put(txtStudentName, namePattern);
+        map.put(txtEmail, EmailPattern);
+        map.put(txtContact, contactPattern);
+        map.put(txtSAddress, AddressPattern);
+        map.put(txtNic, nicPattern);
 
     }
 
@@ -118,12 +118,15 @@ public class StudentManageController {
         btnAdd.setDisable(true);
     }
 
+    /**
+     * LOAD ALL Student Method And Provide Search Features.
+     */
     private void tableLoad() {
         try {
             ResultSet result = CrudUtil.execute("SELECT * FROM student");
             ObservableList<Student> observableList = FXCollections.observableArrayList();
 
-            while (result.next()){
+            while (result.next()) {
                 observableList.add(new Student(
                         result.getString(1),
                         result.getString(2),
@@ -143,11 +146,7 @@ public class StudentManageController {
                         return true;
                     }
                     String lowerCaseFilter = newValue.toLowerCase();
-                    if (student.getStudent_id().toLowerCase().indexOf(lowerCaseFilter) != -1) {
-                        return true;
-                    }
-                    else
-                        return false;
+                    return student.getStudent_id().toLowerCase().indexOf(lowerCaseFilter) != -1;
                 });
             });
 
@@ -162,34 +161,40 @@ public class StudentManageController {
             e.printStackTrace();
         }
     }
-    /** Define the function of cross to among the textFields(use Enter press)  */
-    public void textFields_Key_Released(KeyEvent keyEvent) {
-        ValidationUtil.validate(map,btnAdd);
 
-        if (keyEvent.getCode()== KeyCode.ENTER){
-            Object response = ValidationUtil.validate(map,btnAdd);
-            if (response instanceof JFXTextField){
+    /**
+     * Define the function of cross to among the textFields(use Enter press)
+     */
+    public void textFields_Key_Released(KeyEvent keyEvent) {
+        ValidationUtil.validate(map, btnAdd);
+
+        if (keyEvent.getCode() == KeyCode.ENTER) {
+            Object response = ValidationUtil.validate(map, btnAdd);
+            if (response instanceof JFXTextField) {
                 JFXTextField textField = (JFXTextField) response;
                 textField.requestFocus();
-            }else if (response instanceof Boolean){
+            } else if (response instanceof Boolean) {
 
             }
         }
     }
 
+    /**
+     * ADD Student Method
+     */
     public void AddStudentOnAction(ActionEvent actionEvent) {
 
         Student s = new Student(txtStudentId.getText(), txtStudentName.getText(),
                 txtEmail.getText(), txtContact.getText(), txtSAddress.getText(), txtNic.getText());
 
         try {
-            if(CrudUtil.execute("INSERT INTO student VALUES(?,?,?,?,?,?)",s.getStudent_id(),s.getStudent_name(),
-                    s.getEmail(),s.getContact(),s.getAddress(),s.getNic())){
+            if (CrudUtil.execute("INSERT INTO student VALUES(?,?,?,?,?,?)", s.getStudent_id(), s.getStudent_name(),
+                    s.getEmail(), s.getContact(), s.getAddress(), s.getNic())) {
 
-                new Alert(Alert.AlertType.CONFIRMATION,"Saved...").showAndWait();
+                new Alert(Alert.AlertType.CONFIRMATION, "Saved...").showAndWait();
 
-            }else{
-                new Alert(Alert.AlertType.WARNING,"Student Already exists !!!");
+            } else {
+                new Alert(Alert.AlertType.WARNING, "Student Already exists !!!");
             }
 
         } catch (SQLException e) {
@@ -200,6 +205,10 @@ public class StudentManageController {
         clearFields();
         tableLoad();
     }
+
+    /**
+     * clear all fields Function
+     */
 
     private void clearFields() {
         txtStudentId.clear();
@@ -214,18 +223,21 @@ public class StudentManageController {
         tblStudent.refresh();
     }
 
+    /**
+     * UPDATE Student Method
+     */
     public void UpdateStudentOnAction(ActionEvent actionEvent) {
         Student s = new Student(txtStudentId.getText(), txtStudentName.getText(),
                 txtEmail.getText(), txtContact.getText(), txtSAddress.getText(), txtNic.getText());
 
         try {
-            if(CrudUtil.execute("UPDATE student SET student_name=?,email=?,contact=?,address=? ,nic=? WHERE student_id=?"
-                    ,s.getStudent_name(),s.getEmail(),s.getContact(),s.getAddress(),s.getNic(),s.getStudent_id())){
+            if (CrudUtil.execute("UPDATE student SET student_name=?,email=?,contact=?,address=? ,nic=? WHERE student_id=?"
+                    , s.getStudent_name(), s.getEmail(), s.getContact(), s.getAddress(), s.getNic(), s.getStudent_id())) {
 
-                new Alert(Alert.AlertType.CONFIRMATION,"Updated!").showAndWait();
+                new Alert(Alert.AlertType.CONFIRMATION, "Updated!").showAndWait();
 
-            }else{
-                new Alert(Alert.AlertType.WARNING,"Try Again").show();
+            } else {
+                new Alert(Alert.AlertType.WARNING, "Try Again").show();
             }
 
         } catch (SQLException e) {
@@ -237,21 +249,30 @@ public class StudentManageController {
         clearFields();
     }
 
-    public void DeleteStudentOnAction(ActionEvent actionEvent) {
-        try{
+    /**
+     * DELETE Student Method
+     */
 
-            if(CrudUtil.execute("DELETE FROM Student WHERE student_id =?",txtStudentId.getText())){
-                new Alert(Alert.AlertType.CONFIRMATION,"Deleted!").showAndWait();
-            }else{
-                new Alert(Alert.AlertType.WARNING,"Try Again!").show();
+    public void DeleteStudentOnAction(ActionEvent actionEvent) {
+        try {
+
+            if (CrudUtil.execute("DELETE FROM Student WHERE student_id =?", txtStudentId.getText())) {
+                new Alert(Alert.AlertType.CONFIRMATION, "Deleted!").showAndWait();
+            } else {
+                new Alert(Alert.AlertType.WARNING, "Try Again!").show();
             }
-        }catch (ClassNotFoundException | SQLException |NullPointerException  e){
+        } catch (ClassNotFoundException | SQLException | NullPointerException e) {
             e.printStackTrace();
         }
         tableLoad();
-      clearFields();
+        clearFields();
 
     }
+
+    /**
+     * Clear  Methode
+     */
+
 
     public void btnClearFieldsOnAction(ActionEvent actionEvent) {
         clearFields();
