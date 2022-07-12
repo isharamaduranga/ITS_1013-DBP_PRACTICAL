@@ -172,6 +172,10 @@ public class StudentManageController {
         txtContact.clear();
         txtSAddress.clear();
         txtNic.clear();
+
+        btnUpdate.setDisable(true);
+        btnDelete.setDisable(true);
+        tblStudent.refresh();
     }
 
     public void UpdateStudentOnAction(ActionEvent actionEvent) {
