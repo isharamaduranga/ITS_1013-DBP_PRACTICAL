@@ -86,7 +86,7 @@ public class StudentManageController {
         }
         /** create validation pattern*/
         //Create a pattern and compile it to use
-        Pattern idPattern = Pattern.compile("^(SI-)[0-9]{3,5}$");
+        Pattern idPattern = Pattern.compile("^(ST)[0-9]{3,5}$");
         Pattern namePattern = Pattern.compile("^[A-z]{3,20}$");
         Pattern EmailPattern = Pattern.compile("^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*$");
         Pattern contactPattern = Pattern.compile("^(?:7|0|(?:\\+94))[0-9]{9}$");
